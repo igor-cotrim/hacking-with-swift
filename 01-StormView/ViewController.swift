@@ -20,7 +20,7 @@ class ViewController: UITableViewController {
         let path = Bundle.main.resourcePath!
         let items = try! fm.contentsOfDirectory(atPath: path)
 
-        for item in items {
+        for item in items.sorted() {
             if item.hasPrefix("nssl") {
                 pictures.append(item)
             }
@@ -45,6 +45,8 @@ extension ViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             viewController.selectedImage = pictures[indexPath.row]
+            viewController.currentImageIndex = indexPath.row + 1
+            viewController.totalOfImages = pictures.count
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
