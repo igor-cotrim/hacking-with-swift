@@ -12,54 +12,60 @@ class ViewController: UIViewController {
     @IBOutlet weak var buttonTwo: UIButton!
     @IBOutlet weak var buttonThree: UIButton!
     
-    var countries = [String]()
-    var score = 0
-    var correctAnswer = 0
+    private var quiz = Quiz()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        countries += ["estonia", "france", "germany", "ireland", "italy", "monaco", "nigeria", "poland", "russia", "spain", "uk", "us"]
-        
-        buttonOne.layer.borderWidth = 1
-        buttonOne.layer.borderColor = UIColor.lightGray.cgColor
-        
-        buttonTwo.layer.borderWidth = 1
-        buttonTwo.layer.borderColor = UIColor.lightGray.cgColor
-        
-        buttonThree.layer.borderWidth = 1
-        buttonThree.layer.borderColor = UIColor.lightGray.cgColor
-        
-        askQuestion()
+        setupUI()
+        startNewRound()
     }
     
-    private func askQuestion(action: UIAlertAction! = nil) {
-        countries.shuffle()
-        correctAnswer = Int.random(in: 0...2)
+    private func setupUI() {
+        [buttonOne, buttonTwo, buttonThree].forEach { button in
+            button?.layer.borderWidth = 1
+            button?.layer.borderColor = UIColor.lightGray.cgColor
+        }
+    }
+    
+    private func startNewRound() {
+        quiz.startNewQuestion()
+        updateUI()
+    }
+    
+    private func updateUI() {
+        buttonOne.setImage(UIImage(named: quiz.currentCountries[0]), for: .normal)
+        buttonTwo.setImage(UIImage(named: quiz.currentCountries[1]), for: .normal)
+        buttonThree.setImage(UIImage(named: quiz.currentCountries[2]), for: .normal)
         
-        buttonOne.setImage(UIImage(named: countries[0]), for: .normal)
-        buttonTwo.setImage(UIImage(named: countries[1]), for: .normal)
-        buttonThree.setImage(UIImage(named: countries[2]), for: .normal)
-        
-        title = countries[correctAnswer].uppercased()
+        title = "\(quiz.currentCountries[quiz.correctAnswerIndex].uppercased()) | Score: \(quiz.score) | Question: \(quiz.questionNumber) to \(quiz.totalQuestions)"
+    }
+    
+    private func presentAlert(title: String, message: String, action: @escaping () -> Void) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Continue", style: .default) { _ in action() })
+        present(alert, animated: true)
+    }
+    
+    private func presentGameOverAlert() {
+        let alert = UIAlertController(title: "Game Over!", message: "Your final score is \(quiz.score).", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Play Again", style: .default) { _ in
+            self.quiz.resetGame()
+            self.startNewRound()
+        })
+        present(alert, animated: true)
     }
     
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        var title: String
+        guard let index = [buttonOne, buttonTwo, buttonThree].firstIndex(of: sender) else { return }
         
-        if sender.tag == correctAnswer {
-            title = "Correct!"
-            score += 1
+        let isCorrect = quiz.checkAnswer(index: index)
+        let message = isCorrect ? "Correct!" : "Wrong! That’s the flag of \(quiz.currentCountries[quiz.correctAnswerIndex])"
+        
+        if quiz.isGameOver {
+            presentGameOverAlert()
         } else {
-            title = "Wrong!"
-            score -= 1
+            presentAlert(title: message, message: "Your score is \(quiz.score).", action: startNewRound)
         }
-        
-        let alertController = UIAlertController(title: title, message: "Your score is \(score).", preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
-        
-        present(alertController, animated: true, completion: nil)
     }
 }
