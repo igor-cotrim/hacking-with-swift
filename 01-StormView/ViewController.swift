@@ -15,6 +15,11 @@ class ViewController: UITableViewController {
         
         title = "Storm Viewer"
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .action,
+            target: self,
+            action: #selector(shareTapped)
+        )
 
         let fm = FileManager.default
         let path = Bundle.main.resourcePath!
@@ -25,6 +30,15 @@ class ViewController: UITableViewController {
                 pictures.append(item)
             }
         }
+    }
+    
+    @objc private func shareTapped() {
+        guard let appURL = URL(string: "https://stormviewer.app") else { return }
+        let activityViewController = UIActivityViewController(activityItems: [appURL], applicationActivities: nil)
+        
+        
+        activityViewController.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(activityViewController, animated: true)
     }
 }
 
