@@ -38,6 +38,11 @@ class ViewController: UIViewController {
         buttonThree.setImage(UIImage(named: quiz.currentCountries[2]), for: .normal)
         
         title = "\(quiz.currentCountries[quiz.correctAnswerIndex].uppercased()) | Score: \(quiz.score) | Question: \(quiz.questionNumber) to \(quiz.totalQuestions)"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .compose,
+            target: self,
+            action: #selector(showCurrentScore)
+        )
     }
     
     private func presentAlert(title: String, message: String, action: @escaping () -> Void) {
@@ -55,6 +60,15 @@ class ViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    @objc private func showCurrentScore() {
+        let alert = UIAlertController(
+            title: "YOUR CURRENT SCORE",
+            message: "\(quiz.score)",
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: "Continue", style: .default))
+        present(alert, animated: true)
+    }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         guard let index = [buttonOne, buttonTwo, buttonThree].firstIndex(of: sender) else { return }
