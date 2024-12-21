@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  EasyBrowserViewController.swift
 //  03-EasyBrowser
 //
 //  Created by Igor Cotrim on 20/12/24.
@@ -8,16 +8,15 @@
 import UIKit
 import WebKit
 
-class ViewController: UIViewController {
+class EasyBrowserViewController: UIViewController {
     var webView: WKWebView!
     var progressView: UIProgressView!
     var websites: [String] = [
         "Google",
-        "Apple",
-        "Youtube",
         "Github",
         "Stackoverflow",
     ]
+    var selectedWebsite: String?
     
     override func loadView() {
         webView = WKWebView()
@@ -41,12 +40,26 @@ class ViewController: UIViewController {
             target: webView,
             action: #selector(webView.reload)
         )
+        let backButton = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"),
+                                         style: .plain,
+                                         target: webView,
+                                         action: #selector(webView.goBack))
+        let forwardButton = UIBarButtonItem(image: UIImage(systemName: "chevron.forward"),
+                                            style: .plain,
+                                            target: webView,
+                                            action: #selector(webView.goForward))
         progressView = UIProgressView(progressViewStyle: .default)
         progressView.sizeToFit()
         
         let progressButton = UIBarButtonItem(customView: progressView)
         
-        toolbarItems = [progressButton, spacer, refreshButton]
+        toolbarItems = [
+            progressButton,
+            spacer,
+            backButton,
+            forwardButton,
+            refreshButton
+        ]
         navigationController?.isToolbarHidden = false
         
         webView
@@ -56,7 +69,8 @@ class ViewController: UIViewController {
                 options: .new,
                 context: nil
             )
-        let url = URL(string: "https://www.\(websites[0].lowercased()).com")!
+        guard let selectedWebsite = selectedWebsite else { return }
+        let url = URL(string: "https://www.\(selectedWebsite.lowercased()).com")!
         webView.load(URLRequest(url: url))
         webView.allowsBackForwardNavigationGestures = true
     }
@@ -91,7 +105,7 @@ class ViewController: UIViewController {
 }
 
 // MARK: - WKNavigationDelegate
-extension ViewController: WKNavigationDelegate {
+extension EasyBrowserViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         title = webView.title
     }
@@ -101,18 +115,38 @@ extension ViewController: WKNavigationDelegate {
         decidePolicyFor navigationAction: WKNavigationAction,
         decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void
     ) {
-        let url = navigationAction.request.url
+        guard let url = navigationAction.request.url, let host = url.host else {
+            decisionHandler(.cancel)
+            return
+        }
         
-        if let host = url?.host {
-            for website in websites {
-                if host.contains("\(website.lowercased()).com") {
-                    decisionHandler(.allow)
-                    return
-                }
+        if host.contains("google.com"), url.path.contains("/search") {
+            decisionHandler(.allow)
+            return
+        }
+        
+        for website in websites {
+            if host.contains(website.lowercased()) {
+                decisionHandler(.allow)
+                return
             }
         }
         
+        let alertController = UIAlertController(
+            title: "This website is not supported",
+            message: "Please choose another website",
+            preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            let googleURL = URL(string: "https://google.com")!
+            self.webView.load(URLRequest(url: googleURL))
+        }))
+        
         decisionHandler(.cancel)
+        
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
     }
     
     override func observeValue(
