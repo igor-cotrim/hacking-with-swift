@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  StormViewDetailViewController.swift
 //  01-StormView
 //
 //  Created by Igor Cotrim on 16/12/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class StormViewDetailViewController: UIViewController {
     @IBOutlet var imageView: UIImageView!
     var selectedImage: String?
     var totalOfImages: Int?

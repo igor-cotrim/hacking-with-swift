@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  StormViewViewController.swift
 //  01-StormView
 //
 //  Created by Igor Cotrim on 16/12/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class StormViewViewController: UITableViewController {
     var pictures = [String]()
 
     override func viewDidLoad() {
@@ -43,7 +43,7 @@ class ViewController: UITableViewController {
 }
 
 // MARK: - TableView
-extension ViewController {
+extension StormViewViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
     }
@@ -57,7 +57,7 @@ extension ViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let viewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
+        if let viewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? StormViewDetailViewController {
             viewController.selectedImage = pictures[indexPath.row]
             viewController.currentImageIndex = indexPath.row + 1
             viewController.totalOfImages = pictures.count

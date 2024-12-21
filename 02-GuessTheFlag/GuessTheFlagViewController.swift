@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  GuessTheFlagViewController.swift
 //  02-GuessTheFlag
 //
 //  Created by Igor Cotrim on 16/12/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class GuessTheFlagViewController: UIViewController {
     @IBOutlet weak var buttonOne: UIButton!
     @IBOutlet weak var buttonTwo: UIButton!
     @IBOutlet weak var buttonThree: UIButton!

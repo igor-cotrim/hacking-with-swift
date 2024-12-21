@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Storm View View Controller-->
         <scene sceneID="dOM-SH-l6P">
             <objects>
-                <tableViewController id="KRj-Ho-QFU" customClass="ViewController" customModule="_1_StormView" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KRj-Ho-QFU" customClass="StormViewViewController" customModule="_1_StormView" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="KFz-h9-3mf">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -46,10 +46,10 @@
             </objects>
             <point key="canvasLocation" x="756.48854961832058" y="1.4084507042253522"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Storm View Detail View Controller-->
         <scene sceneID="VQg-br-dXU">
             <objects>
-                <viewController storyboardIdentifier="Detail" id="4Dy-WL-MBx" customClass="DetailViewController" customModule="_1_StormView" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Detail" id="4Dy-WL-MBx" customClass="StormViewDetailViewController" customModule="_1_StormView" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NVD-Gf-yde">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
