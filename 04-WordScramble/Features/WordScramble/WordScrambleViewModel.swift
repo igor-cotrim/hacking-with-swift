@@ -15,7 +15,7 @@ final class WordScrambleViewModel {
     
     var onGameStart: ((String) -> Void)?
     var onWordAdded: ((IndexPath) -> Void)?
-    var onError: ((String, String) -> Void)?
+    var showErrorMessage: ((String, String) -> Void)?
     
     private func loadWords() {
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
@@ -31,6 +31,10 @@ final class WordScrambleViewModel {
     
     private func isPossible(word: String) -> Bool {
         var tempWord = currentWord.lowercased()
+        
+        if word.lowercased() == tempWord {
+            return false
+        }
         
         for character in word {
             if let index = tempWord.firstIndex(of: character) {
@@ -48,6 +52,10 @@ final class WordScrambleViewModel {
     }
     
     private func isReal(word: String) -> Bool {
+        guard word.count >= 3 else {
+            return false
+        }
+        
         let checker = UITextChecker()
         let range = NSRange(location: 0, length: word.utf16.count)
         let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
@@ -69,13 +77,13 @@ extension WordScrambleViewModel {
         let lowerAnswer = answer.lowercased()
         
         if !isPossible(word: lowerAnswer) {
-            onError?("Word not possible", "You can't make words out of letters you don't have!")
+            showErrorMessage?("Word not possible", "You can't make words out of letters you don't have!")
         } else if !isOriginal(word: lowerAnswer) {
-            onError?("Word already used", "Be more original, please!")
+            showErrorMessage?("Word already used", "Be more original, please!")
         } else if !isReal(word: lowerAnswer) {
-            onError?("Word not recognized", "You can't just make them up, you know!")
+            showErrorMessage?("Word not recognized", "You can't just make them up, you know!")
         } else {
-            usedWords.insert(answer, at: 0)
+            usedWords.insert(answer.lowercased(), at: 0)
             onWordAdded?(IndexPath(row: 0, section: 0))
         }
     }

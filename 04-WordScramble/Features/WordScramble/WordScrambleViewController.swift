@@ -19,6 +19,12 @@ final class WordScrambleViewController: UITableViewController {
     }
     
     private func setupNavigationBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .refresh,
+            target: self,
+            action: #selector(restartGame)
+            
+        )
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -36,7 +42,7 @@ final class WordScrambleViewController: UITableViewController {
             self?.tableView.insertRows(at: [indexPath], with: .automatic)
         }
         
-        viewModel.onError = { [weak self] errorTitle, errorMessage in
+        viewModel.showErrorMessage = { [weak self] errorTitle, errorMessage in
             let alert = UIAlertController(
                 title: errorTitle,
                 message: errorMessage,
@@ -60,6 +66,10 @@ final class WordScrambleViewController: UITableViewController {
         
         alert.addAction(submitAction)
         present(alert, animated: true)
+    }
+    
+    @objc private func restartGame() {
+        viewModel.startGame()
     }
 }
 
