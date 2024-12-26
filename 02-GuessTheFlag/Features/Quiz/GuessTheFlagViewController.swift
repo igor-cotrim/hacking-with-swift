@@ -16,15 +16,7 @@ class GuessTheFlagViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         startNewRound()
-    }
-    
-    private func setupUI() {
-        [buttonOne, buttonTwo, buttonThree].forEach { button in
-            button?.layer.borderWidth = 1
-            button?.layer.borderColor = UIColor.lightGray.cgColor
-        }
     }
     
     private func startNewRound() {

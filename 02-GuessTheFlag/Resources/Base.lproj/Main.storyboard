@@ -18,6 +18,9 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWJ-xT-fDH">
                                 <rect key="frame" x="84.666666666666686" y="103" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="BWJ-xT-fDH" secondAttribute="height" multiplier="112:57" id="sIu-IG-dpg"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="us"/>
                                 <connections>
@@ -26,6 +29,9 @@
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xWE-j7-Clp">
                                 <rect key="frame" x="84.666666666666686" y="391" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="xWE-j7-Clp" secondAttribute="height" multiplier="112:57" id="bxv-kv-7X7"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="germany"/>
                                 <connections>
@@ -34,6 +40,9 @@
                             </button>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dFJ-zr-fYI">
                                 <rect key="frame" x="84.666666666666686" y="247" width="224" height="114"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="dFJ-zr-fYI" secondAttribute="height" multiplier="112:57" id="Wmf-4t-2lL"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="uk"/>
                                 <connections>
@@ -42,12 +51,15 @@
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="xWE-j7-Clp" secondAttribute="bottom" constant="20" id="2Js-Vq-0kU"/>
                             <constraint firstItem="BWJ-xT-fDH" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8w9-TF-hDR"/>
                             <constraint firstItem="xWE-j7-Clp" firstAttribute="centerX" secondItem="dFJ-zr-fYI" secondAttribute="centerX" id="B1w-k1-Dtq"/>
                             <constraint firstItem="xWE-j7-Clp" firstAttribute="top" secondItem="dFJ-zr-fYI" secondAttribute="bottom" constant="30" id="JFY-px-7OK"/>
                             <constraint firstItem="dFJ-zr-fYI" firstAttribute="centerX" secondItem="BWJ-xT-fDH" secondAttribute="centerX" id="KAk-wF-ocv"/>
+                            <constraint firstItem="xWE-j7-Clp" firstAttribute="height" secondItem="dFJ-zr-fYI" secondAttribute="height" id="KKq-Ve-iB4"/>
+                            <constraint firstItem="dFJ-zr-fYI" firstAttribute="height" secondItem="BWJ-xT-fDH" secondAttribute="height" id="aaJ-vo-M7W"/>
                             <constraint firstItem="BWJ-xT-fDH" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="dgn-yl-FS4"/>
                             <constraint firstItem="dFJ-zr-fYI" firstAttribute="top" secondItem="BWJ-xT-fDH" secondAttribute="bottom" constant="30" id="gaa-L2-BXe"/>
                         </constraints>
@@ -86,8 +98,8 @@
         <image name="germany" width="200" height="100"/>
         <image name="uk" width="200" height="100"/>
         <image name="us" width="200" height="100"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
