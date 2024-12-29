@@ -10,6 +10,7 @@
 		812F96CD2D10FC340057E0C0 /* 02-GuessTheFlag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "02-GuessTheFlag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819005242D10EDF10071B0DB /* 01-StormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-StormView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E00E062D15E5600000410B /* 03-EasyBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-EasyBrowser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "05-WhitehousePetitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F934812D1A04C700B33C41 /* 04-WordScramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "04-WordScramble.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -34,6 +35,13 @@
 				Info.plist,
 			);
 			target = 81E00E052D15E5600000410B /* 03-EasyBrowser */;
+		};
+		81F1EE922D1F140D000607CA /* Exceptions for "05-WhitehousePetitions" folder in "05-WhitehousePetitions" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 81F1EE7E2D1F140D000607CA /* 05-WhitehousePetitions */;
 		};
 		81F934942D1A04C900B33C41 /* Exceptions for "04-WordScramble" folder in "04-WordScramble" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -69,6 +77,14 @@
 			path = "03-EasyBrowser";
 			sourceTree = "<group>";
 		};
+		81F1EE802D1F140D000607CA /* 05-WhitehousePetitions */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				81F1EE922D1F140D000607CA /* Exceptions for "05-WhitehousePetitions" folder in "05-WhitehousePetitions" target */,
+			);
+			path = "05-WhitehousePetitions";
+			sourceTree = "<group>";
+		};
 		81F934822D1A04C700B33C41 /* 04-WordScramble */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -101,6 +117,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81F1EE7C2D1F140D000607CA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81F9347E2D1A04C700B33C41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -118,6 +141,7 @@
 				812F96CE2D10FC340057E0C0 /* 02-GuessTheFlag */,
 				81E00E072D15E5600000410B /* 03-EasyBrowser */,
 				81F934822D1A04C700B33C41 /* 04-WordScramble */,
+				81F1EE802D1F140D000607CA /* 05-WhitehousePetitions */,
 				819005252D10EDF10071B0DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -129,6 +153,7 @@
 				812F96CD2D10FC340057E0C0 /* 02-GuessTheFlag.app */,
 				81E00E062D15E5600000410B /* 03-EasyBrowser.app */,
 				81F934812D1A04C700B33C41 /* 04-WordScramble.app */,
+				81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -202,6 +227,28 @@
 			productReference = 81E00E062D15E5600000410B /* 03-EasyBrowser.app */;
 			productType = "com.apple.product-type.application";
 		};
+		81F1EE7E2D1F140D000607CA /* 05-WhitehousePetitions */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81F1EE932D1F140D000607CA /* Build configuration list for PBXNativeTarget "05-WhitehousePetitions" */;
+			buildPhases = (
+				81F1EE7B2D1F140D000607CA /* Sources */,
+				81F1EE7C2D1F140D000607CA /* Frameworks */,
+				81F1EE7D2D1F140D000607CA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81F1EE802D1F140D000607CA /* 05-WhitehousePetitions */,
+			);
+			name = "05-WhitehousePetitions";
+			packageProductDependencies = (
+			);
+			productName = "05-WhitehousePetitions";
+			productReference = 81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */;
+			productType = "com.apple.product-type.application";
+		};
 		81F934802D1A04C700B33C41 /* 04-WordScramble */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81F934952D1A04C900B33C41 /* Build configuration list for PBXNativeTarget "04-WordScramble" */;
@@ -243,6 +290,9 @@
 					81E00E052D15E5600000410B = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					81F1EE7E2D1F140D000607CA = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					81F934802D1A04C700B33C41 = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -266,6 +316,7 @@
 				812F96CC2D10FC340057E0C0 /* 02-GuessTheFlag */,
 				81E00E052D15E5600000410B /* 03-EasyBrowser */,
 				81F934802D1A04C700B33C41 /* 04-WordScramble */,
+				81F1EE7E2D1F140D000607CA /* 05-WhitehousePetitions */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +337,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		81E00E042D15E5600000410B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F1EE7D2D1F140D000607CA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -317,6 +375,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		81E00E022D15E5600000410B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81F1EE7B2D1F140D000607CA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -622,6 +687,62 @@
 			};
 			name = Release;
 		};
+		81F1EE902D1F140D000607CA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "05-WhitehousePetitions/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-5-WhitehousePetitions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81F1EE912D1F140D000607CA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "05-WhitehousePetitions/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-5-WhitehousePetitions";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		81F934922D1A04C900B33C41 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -713,6 +834,15 @@
 			buildConfigurations = (
 				81E00E192D15E5610000410B /* Debug */,
 				81E00E1A2D15E5610000410B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81F1EE932D1F140D000607CA /* Build configuration list for PBXNativeTarget "05-WhitehousePetitions" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81F1EE902D1F140D000607CA /* Debug */,
+				81F1EE912D1F140D000607CA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

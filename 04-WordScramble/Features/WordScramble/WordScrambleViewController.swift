@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  WordScrambleViewController.swift
 //  04-WordScramble
 //
 //  Created by Igor Cotrim on 23/12/24.
