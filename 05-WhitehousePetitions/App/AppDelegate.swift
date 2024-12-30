@@ -9,25 +9,7 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let tabBarController = window?.rootViewController as? UITabBarController {
-            print("TabBarController encontrado")
-            let navigationController = storyboard.instantiateViewController(withIdentifier: "PetitionsNavController")
-            print("NavigationController carregado: \(navigationController)")
-            navigationController.tabBarItem = UITabBarItem(
-                tabBarSystemItem: .topRated,
-                tag: 1
-            )
-            tabBarController.viewControllers?.append(navigationController)
-        } else {
-            print(
-                "TabBarController não encontrado: \(window?.rootViewController)"
-            )
-        }
-        
         return true
     }
 
