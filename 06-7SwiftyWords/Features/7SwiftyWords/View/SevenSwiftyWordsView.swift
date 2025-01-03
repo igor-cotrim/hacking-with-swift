@@ -9,22 +9,13 @@ import UIKit
 
 final class SevenSwiftyWordsView: UIView {
     // MARK: - Properties
-    var clearAction: (() -> Void)?
-    var submitAction: ((String) -> Void)?
-    var letterAction: ((String) -> Void)?
-    var onLevelUp: (() -> Void)?
-    var onWrongAnswer: (() -> Void)?
+    private var letterButtons = [UIButton]()
+    private var usedButtons: Set<UIButton> = []
+    private var currentButtons: [UIButton] = []
     
-    var letterButtons = [UIButton]()
-    var activatedButtons = [UIButton]()
-    var solutions = [String]()
-    var score = 0 {
-        didSet {
-            scoreLabel.text = "Score: \(score)"
-        }
-    }
-    var level = 1
-    var correctAnswersCount = 0
+    var onSubmitAnswer: (() -> Void)?
+    var onLetterTapped: ((String, UIButton) -> Void)?
+    var onClearTapped: (() -> Void)?
     
     // MARK: - Subviews
     private let scoreLabel: UILabel = {
@@ -111,14 +102,14 @@ final class SevenSwiftyWordsView: UIView {
     private func setupLetterButtons() {
         let width = 150
         let height = 80
-
+        
         for row in 0..<4 {
             for column in 0..<5 {
                 let letterButton = UIButton(type: .system)
                 letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
                 letterButton.setTitle("WWW", for: .normal)
                 letterButton.addTarget(self, action: #selector(letterTapped), for: .touchUpInside)
-
+                
                 let frame = CGRect(
                     x: column * width,
                     y: row * height,
@@ -126,7 +117,7 @@ final class SevenSwiftyWordsView: UIView {
                     height: height
                 )
                 letterButton.frame = frame
-
+                
                 buttonsView.addSubview(letterButton)
                 letterButtons.append(letterButton)
             }
@@ -187,113 +178,62 @@ final class SevenSwiftyWordsView: UIView {
 
 // MARK: - Public Methods
 extension SevenSwiftyWordsView {
-    func setup() {
-        var clueString = ""
-        var solutionString = ""
-        var letterBits = [String]()
-        
-        if let levelFilePath = Bundle.main.path(forResource: "level\(level)", ofType: "txt") {
-            if let levelContents = try? String(contentsOfFile: levelFilePath, encoding: .utf8) {
-                var lines = levelContents.components(separatedBy: "\n")
-                lines.shuffle()
-                
-                for (index, line) in lines.enumerated() {
-                    let parts = line.components(separatedBy: ": ")
-                    let answer = parts[0]
-                    let clue = parts[1]
-                    
-                    clueString += "\(index + 1). \(clue)\n"
-                    
-                    let solutionWord = answer.replacingOccurrences(of: "|", with: "")
-                    solutionString += "\(solutionWord.count) letters\n"
-                    solutions.append(solutionWord)
-                    
-                    let bits = answer.components(separatedBy: "|")
-                    letterBits += bits
-                }
-            }
-        }
-        
-        cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-        
-        letterBits.shuffle()
-        
-        if letterBits.count == letterButtons.count {
-            for i in 0 ..< letterBits.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
-            }
+    func updateScore(_ score: Int) {
+        scoreLabel.text = "Score: \(score)"
+    }
+    
+    func updateClues(_ clues: String) {
+        cluesLabel.text = clues
+    }
+    
+    func updateAnswers(_ answers: String) {
+        answersLabel.text = answers
+    }
+    
+    func updateLetterButtons(_ letters: [String]) {
+        usedButtons.removeAll()
+        currentButtons.removeAll()
+        for (index, letter) in letters.enumerated() where index < letterButtons.count {
+            letterButtons[index].setTitle(letter, for: .normal)
+            letterButtons[index].isHidden = false
         }
     }
     
-    func levelUp() {
-        level += 1
-        
-        if level > 2 {
-            level = 1
-        }
-        
-        solutions.removeAll(keepingCapacity: true)
-        setup()
-        
-        for button in letterButtons {
-            button.isHidden = false
-        }
+    func updateCurrentAnswer(_ text: String) {
+        currentAnswer.text = text
     }
     
-    func wrongAnswer() {
-        if score > 0 {
-            score -= 1
+    func resetCurrentButtons() {
+        for button in currentButtons {
+            if !usedButtons.contains(button) {
+                button.isHidden = false
+            }
         }
-        currentAnswer.text = ""
-        
-        for button in activatedButtons {
-            button.isHidden = false
+        currentButtons.removeAll()
+    }
+    
+    func markButtonsAsUsedInCorrectWord() {
+        for button in currentButtons {
+            usedButtons.insert(button)
         }
-        
-        activatedButtons.removeAll()
+        currentButtons.removeAll()
     }
 }
 
 // MARK: - Objc methods
 @objc extension SevenSwiftyWordsView {
-    private func clearTapped(_ sender: UIButton) {
-        currentAnswer.text = ""
-        
-        for button in activatedButtons {
-            button.isHidden = false
-        }
-        
-        activatedButtons.removeAll()
+    private func letterTapped(_ sender: UIButton) {
+        guard let buttonTitle = sender.titleLabel?.text else { return }
+        onLetterTapped?(buttonTitle, sender)
+        currentButtons.append(sender)
+        sender.isHidden = true
     }
     
     private func submitTapped(_ sender: UIButton) {
-        guard let answerText = currentAnswer.text else { return }
-        if let solutionPosition = solutions.firstIndex(of: answerText) {
-            activatedButtons.removeAll()
-            
-            var splitAnswers = answersLabel.text?.components(separatedBy: "\n")
-            splitAnswers?[solutionPosition] = answerText
-            answersLabel.text = splitAnswers?.joined(separator: "\n")
-            
-            currentAnswer.text = ""
-            score += 1
-            correctAnswersCount += 1
-            
-            if correctAnswersCount == 7 {
-                correctAnswersCount = 0
-                onLevelUp?()
-            }
-        } else {
-            onWrongAnswer?()
-        }
+        onSubmitAnswer?()
     }
     
-    private func letterTapped(_ sender: UIButton) {
-        guard let buttonTitle = sender.titleLabel?.text else { return }
-        
-        currentAnswer.text = currentAnswer.text! + buttonTitle
-        activatedButtons.append(sender)
-        sender.isHidden = true
+    private func clearTapped(_ sender: UIButton) {
+        onClearTapped?()
     }
 }

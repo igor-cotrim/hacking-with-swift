@@ -7,22 +7,9 @@
 
 import UIKit
 
-class SevenSwiftyWordsViewController: UIViewController {
-    // MARK: - Properties
+final class SevenSwiftyWordsViewController: UIViewController {
     private let contentView = SevenSwiftyWordsView()
     private let viewModel = SevenSwiftyWordsViewModel()
-    //
-    //    // MARK: - Initializer
-    //    init(contentView: SevenSwiftyWordsView) {
-    //        self.contentView = contentView
-    //
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
-    //
-    //    @available (*, unavailable)
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
     
     override func loadView() {
         view = contentView
@@ -30,45 +17,87 @@ class SevenSwiftyWordsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupBindings()
-        contentView.setup()
+        viewModel.loadLevel()
     }
     
     private func setupBindings() {
-        contentView.onLevelUp = { [weak self] in
+        // View -> ViewModel bindings
+        contentView.onLetterTapped = { [weak self] letter, button in
+            self?.viewModel.appendLetter(letter)
+        }
+        
+        contentView.onSubmitAnswer = { [weak self] in
+            self?.viewModel.submitAnswer()
+        }
+        
+        contentView.onClearTapped = { [weak self] in
+            self?.viewModel.clearCurrentAnswer()
+        }
+        
+        // ViewModel -> View bindings
+        viewModel.onCurrentAnswerUpdated = { [weak self] text in
+            self?.contentView.updateCurrentAnswer(text)
+        }
+        
+        viewModel.onMarkButtonsAsUsed = { [weak self] in
+            self?.contentView.markButtonsAsUsedInCorrectWord()
+        }
+        
+        viewModel.onClearButtons = { [weak self] in
+            self?.contentView.resetCurrentButtons()
+        }
+        
+        viewModel.onResetCurrentButtons = { [weak self] in
+            self?.contentView.resetCurrentButtons()
+        }
+        
+        viewModel.onScoreUpdated = { [weak self] score in
+            self?.contentView.updateScore(score)
+        }
+        
+        viewModel.onCluesUpdated = { [weak self] clues in
+            self?.contentView.updateClues(clues)
+        }
+        
+        viewModel.onAnswersUpdated = { [weak self] answers in
+            self?.contentView.updateAnswers(answers)
+        }
+        
+        viewModel.onLettersUpdated = { [weak self] letters in
+            self?.contentView.updateLetterButtons(letters)
+        }
+        
+        viewModel.onLevelCompleted = { [weak self] in
             let action = UIAlertController(
                 title: "Well done!",
                 message: "Are you ready for the next challenge?",
                 preferredStyle: .alert
             )
-            action
-                .addAction(
-                    UIAlertAction(
-                        title: "Let's go!",
-                        style: .default,
-                        handler: { _ in self?.contentView.levelUp() }
-                    )
+            action.addAction(
+                UIAlertAction(
+                    title: "Let's go!",
+                    style: .default,
+                    handler: { [weak self] _ in
+                        self?.viewModel.levelUp()
+                    }
                 )
-            
+            )
             self?.present(action, animated: true)
         }
         
-        contentView.onWrongAnswer = { [weak self] in
+        viewModel.onWrongAnswer = { [weak self] in
             let action = UIAlertController(
                 title: "Your answer is wrong!",
                 message: "Try again",
                 preferredStyle: .alert
             )
-            action
-                .addAction(
-                    UIAlertAction(
-                        title: "Ok",
-                        style: .default,
-                        handler: { _ in self?.contentView.wrongAnswer() }
-                    )
+            action.addAction(
+                UIAlertAction(
+                    title: "Ok",
+                    style: .default
                 )
-            
+            )
             self?.present(action, animated: true)
         }
     }
