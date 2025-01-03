@@ -53,5 +53,23 @@ class SevenSwiftyWordsViewController: UIViewController {
             
             self?.present(action, animated: true)
         }
+        
+        contentView.onWrongAnswer = { [weak self] in
+            let action = UIAlertController(
+                title: "Your answer is wrong!",
+                message: "Try again",
+                preferredStyle: .alert
+            )
+            action
+                .addAction(
+                    UIAlertAction(
+                        title: "Ok",
+                        style: .default,
+                        handler: { _ in self?.contentView.wrongAnswer() }
+                    )
+                )
+            
+            self?.present(action, animated: true)
+        }
     }
 }

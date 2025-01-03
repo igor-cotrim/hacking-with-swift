@@ -13,6 +13,7 @@ final class SevenSwiftyWordsView: UIView {
     var submitAction: ((String) -> Void)?
     var letterAction: ((String) -> Void)?
     var onLevelUp: (() -> Void)?
+    var onWrongAnswer: (() -> Void)?
     
     var letterButtons = [UIButton]()
     var activatedButtons = [UIButton]()
@@ -23,6 +24,7 @@ final class SevenSwiftyWordsView: UIView {
         }
     }
     var level = 1
+    var correctAnswersCount = 0
     
     // MARK: - Subviews
     private let scoreLabel: UILabel = {
@@ -81,6 +83,8 @@ final class SevenSwiftyWordsView: UIView {
     private let buttonsView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.gray.cgColor
         return view
     }()
     
@@ -225,12 +229,29 @@ extension SevenSwiftyWordsView {
     func levelUp() {
         level += 1
         
+        if level > 2 {
+            level = 1
+        }
+        
         solutions.removeAll(keepingCapacity: true)
         setup()
         
         for button in letterButtons {
             button.isHidden = false
         }
+    }
+    
+    func wrongAnswer() {
+        if score > 0 {
+            score -= 1
+        }
+        currentAnswer.text = ""
+        
+        for button in activatedButtons {
+            button.isHidden = false
+        }
+        
+        activatedButtons.removeAll()
     }
 }
 
@@ -248,7 +269,6 @@ extension SevenSwiftyWordsView {
     
     private func submitTapped(_ sender: UIButton) {
         guard let answerText = currentAnswer.text else { return }
-        
         if let solutionPosition = solutions.firstIndex(of: answerText) {
             activatedButtons.removeAll()
             
@@ -258,10 +278,14 @@ extension SevenSwiftyWordsView {
             
             currentAnswer.text = ""
             score += 1
+            correctAnswersCount += 1
             
-            if score % 7 == 0 {
+            if correctAnswersCount == 7 {
+                correctAnswersCount = 0
                 onLevelUp?()
             }
+        } else {
+            onWrongAnswer?()
         }
     }
     
