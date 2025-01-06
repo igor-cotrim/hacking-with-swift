@@ -20,7 +20,8 @@ class WhitehousePetitionsViewModel {
     }
     
     func loadPetitions() {
-        onUpdate?() // Trigger loading state
+        onUpdate?()
+        
         service.fetchPetitions() { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
@@ -36,7 +37,19 @@ class WhitehousePetitionsViewModel {
     }
     
     func showFilteredPetitions(for filter: String) {
-        filteredPetitions = petitions.filter { $0.title.localizedCaseInsensitiveContains(filter) }
         onUpdate?()
+        
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
+            
+            let filtered = self.petitions.filter {
+                $0.title.localizedCaseInsensitiveContains(filter)
+            }
+            
+            DispatchQueue.main.async {
+                self.filteredPetitions = filtered
+                self.onUpdate?()
+            }
+        }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class StormViewViewController: UITableViewController {
     var pictures = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,14 +20,30 @@ class StormViewViewController: UITableViewController {
             target: self,
             action: #selector(shareTapped)
         )
-
-        let fm = FileManager.default
-        let path = Bundle.main.resourcePath!
-        let items = try! fm.contentsOfDirectory(atPath: path)
-
-        for item in items.sorted() {
-            if item.hasPrefix("nssl") {
-                pictures.append(item)
+        
+        // Começamos o carregamento imediatamente em uma thread background
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            // Todas as operações de arquivo acontecem aqui na thread background
+            let fm = FileManager.default
+            let path = Bundle.main.resourcePath!
+            let items = try! fm.contentsOfDirectory(atPath: path)
+            
+            // Criamos um array temporário para armazenar as imagens encontradas
+            var tempPictures: [String] = []
+            
+            // Processamos os arquivos na thread background
+            for item in items.sorted() {
+                if item.hasPrefix("nssl") {
+                    tempPictures.append(item)
+                }
+            }
+            
+            // Voltamos para a main thread para atualizar a UI
+            DispatchQueue.main.async {
+                // Usamos self? porque estamos em um closure com [weak self]
+                self?.pictures = tempPictures
+                // Recarregamos a tableView depois que as imagens foram carregadas
+                self?.tableView.reloadData()
             }
         }
     }
@@ -47,7 +63,7 @@ extension StormViewViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return pictures.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         let picture = pictures[indexPath.row]

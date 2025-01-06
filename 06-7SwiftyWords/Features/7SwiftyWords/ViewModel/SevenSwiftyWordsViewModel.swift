@@ -40,32 +40,41 @@ final class SevenSwiftyWordsViewModel {
     private var currentAnswersText: String = ""
     
     // MARK: - Private methods
-    private func loadLevelData() -> Level? {
-        guard let levelFilePath = Bundle.main.path(forResource: "level\(level)", ofType: "txt"),
-              let levelContents = try? String(contentsOfFile: levelFilePath, encoding: .utf8) else {
-            return nil
-        }
-        
-        var words: [Word] = []
-        var letterBits: [String] = []
-        
-        let lines = levelContents.components(separatedBy: "\n").shuffled()
-        
-        for line in lines {
-            let parts = line.components(separatedBy: ": ")
-            let answer = parts[0]
-            let clue = parts[1]
+    private func loadLevelData(completion: @escaping (Level?) -> Void) {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self = self else { return }
             
-            let solutionWord = answer.replacingOccurrences(of: "|", with: "")
-            solutions.append(solutionWord)
+            guard let levelFilePath = Bundle.main.path(forResource: "level\(self.level)", ofType: "txt"),
+                  let levelContents = try? String(contentsOfFile: levelFilePath, encoding: .utf8) else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
+                return
+            }
             
-            words.append(Word(answer: solutionWord, clue: clue))
-            letterBits += answer.components(separatedBy: "|")
+            var words: [Word] = []
+            var letterBits: [String] = []
+            
+            let lines = levelContents.components(separatedBy: "\n").shuffled()
+            
+            for line in lines {
+                let parts = line.components(separatedBy: ": ")
+                let answer = parts[0]
+                let clue = parts[1]
+                
+                let solutionWord = answer.replacingOccurrences(of: "|", with: "")
+                self.solutions.append(solutionWord)
+                
+                words.append(Word(answer: solutionWord, clue: clue))
+                letterBits += answer.components(separatedBy: "|")
+            }
+            
+            // Voltamos para a main thread para atualizar a UI e completar o carregamento
+            DispatchQueue.main.async {
+                self.onLettersUpdated?(letterBits.shuffled())
+                completion(Level(number: self.level, words: words))
+            }
         }
-        
-        onLettersUpdated?(letterBits.shuffled())
-        
-        return Level(number: level, words: words)
     }
     
     private func updateUI(with words: [Word]) {
@@ -100,9 +109,12 @@ final class SevenSwiftyWordsViewModel {
 // MARK: - Public Methods
 extension SevenSwiftyWordsViewModel {
     func loadLevel() {
-        if let levelData = loadLevelData() {
-            currentWords = levelData.words
-            updateUI(with: levelData.words)
+        loadLevelData { [weak self] levelData in
+            guard let self = self,
+                  let levelData = levelData else { return }
+            
+            self.currentWords = levelData.words
+            self.updateUI(with: levelData.words)
         }
     }
     
