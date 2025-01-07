@@ -77,7 +77,7 @@ extension NamesToFacesViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        showRenameAlert(for: indexPath)
+        showAlertToRenameOrDelete(for: indexPath)
     }
 }
 
@@ -103,6 +103,25 @@ extension NamesToFacesViewController: UIImagePickerControllerDelegate, UINavigat
 
 // MARK: - UI Helpers
 extension NamesToFacesViewController {
+    private func showAlertToRenameOrDelete(for indexPath: IndexPath) {
+        let person = viewModel.person(at: indexPath.item)
+        let alert = UIAlertController(
+            title: "You want to rename \(person.name) or delete it?",
+            message: nil,
+            preferredStyle: .alert
+        )
+        
+        alert.addAction(UIAlertAction(title: "Rename", style: .default) { [weak self] _ in
+            self?.showRenameAlert(for: indexPath)
+        })
+        alert.addAction(UIAlertAction(title: "Delete", style: .default) { [weak self] _ in
+            self?.viewModel.deletePerson(at: indexPath.item)
+        })
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+    
     private func showRenameAlert(for indexPath: IndexPath) {
         let person = viewModel.person(at: indexPath.item)
         let alert = UIAlertController(
@@ -112,7 +131,7 @@ extension NamesToFacesViewController {
         )
         
         alert.addTextField { textField in
-            textField.text = person.name
+            textField.text = person.name == "Unknown" ? "" : person.name
         }
         
         alert.addAction(UIAlertAction(title: "OK", style: .default) { [weak self] _ in

@@ -45,6 +45,12 @@ class NamesToFacesViewModel {
         onPeopleUpdated?()
     }
     
+    func deletePerson(at index: Int) {
+        guard index < people.count else { return }
+        people.remove(at: index)
+        onPeopleUpdated?()
+    }
+    
     func updatePersonName(at index: Int, with newName: String) {
         guard index < people.count else { return }
         people[index].name = newName
