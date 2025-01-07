@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		8123FDFB2D26F656009CE726 /* 06-7SwiftyWords.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "06-7SwiftyWords.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		812F96CD2D10FC340057E0C0 /* 02-GuessTheFlag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "02-GuessTheFlag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "07-NamesToFaces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819005242D10EDF10071B0DB /* 01-StormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-StormView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E00E062D15E5600000410B /* 03-EasyBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-EasyBrowser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "05-WhitehousePetitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -29,6 +30,13 @@
 				Info.plist,
 			);
 			target = 812F96CC2D10FC340057E0C0 /* 02-GuessTheFlag */;
+		};
+		814F98692D2DD41900CEBA38 /* Exceptions for "07-NamesToFaces" folder in "07-NamesToFaces" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 814F98552D2DD41800CEBA38 /* 07-NamesToFaces */;
 		};
 		819005362D10EDF20071B0DB /* Exceptions for "01-StormView" folder in "01-StormView" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -75,6 +83,14 @@
 				812F96E02D10FC350057E0C0 /* Exceptions for "02-GuessTheFlag" folder in "02-GuessTheFlag" target */,
 			);
 			path = "02-GuessTheFlag";
+			sourceTree = "<group>";
+		};
+		814F98572D2DD41800CEBA38 /* 07-NamesToFaces */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				814F98692D2DD41900CEBA38 /* Exceptions for "07-NamesToFaces" folder in "07-NamesToFaces" target */,
+			);
+			path = "07-NamesToFaces";
 			sourceTree = "<group>";
 		};
 		819005262D10EDF10071B0DB /* 01-StormView */ = {
@@ -126,6 +142,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		814F98532D2DD41800CEBA38 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		819005212D10EDF10071B0DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -166,6 +189,7 @@
 				81F934822D1A04C700B33C41 /* 04-WordScramble */,
 				81F1EE802D1F140D000607CA /* 05-WhitehousePetitions */,
 				8123FDFC2D26F657009CE726 /* 06-7SwiftyWords */,
+				814F98572D2DD41800CEBA38 /* 07-NamesToFaces */,
 				819005252D10EDF10071B0DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -179,6 +203,7 @@
 				81F934812D1A04C700B33C41 /* 04-WordScramble.app */,
 				81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */,
 				8123FDFB2D26F656009CE726 /* 06-7SwiftyWords.app */,
+				814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,6 +253,28 @@
 			);
 			productName = "02-GuessTheFlag";
 			productReference = 812F96CD2D10FC340057E0C0 /* 02-GuessTheFlag.app */;
+			productType = "com.apple.product-type.application";
+		};
+		814F98552D2DD41800CEBA38 /* 07-NamesToFaces */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 814F986A2D2DD41900CEBA38 /* Build configuration list for PBXNativeTarget "07-NamesToFaces" */;
+			buildPhases = (
+				814F98522D2DD41800CEBA38 /* Sources */,
+				814F98532D2DD41800CEBA38 /* Frameworks */,
+				814F98542D2DD41800CEBA38 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				814F98572D2DD41800CEBA38 /* 07-NamesToFaces */,
+			);
+			name = "07-NamesToFaces";
+			packageProductDependencies = (
+			);
+			productName = "07-NamesToFaces";
+			productReference = 814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */;
 			productType = "com.apple.product-type.application";
 		};
 		819005232D10EDF10071B0DB /* 01-StormView */ = {
@@ -334,6 +381,9 @@
 					812F96CC2D10FC340057E0C0 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					814F98552D2DD41800CEBA38 = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					819005232D10EDF10071B0DB = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -368,6 +418,7 @@
 				81F934802D1A04C700B33C41 /* 04-WordScramble */,
 				81F1EE7E2D1F140D000607CA /* 05-WhitehousePetitions */,
 				8123FDFA2D26F656009CE726 /* 06-7SwiftyWords */,
+				814F98552D2DD41800CEBA38 /* 07-NamesToFaces */,
 			);
 		};
 /* End PBXProject section */
@@ -381,6 +432,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		812F96CB2D10FC340057E0C0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		814F98542D2DD41800CEBA38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -426,6 +484,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		812F96C92D10FC340057E0C0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		814F98522D2DD41800CEBA38 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -574,6 +639,62 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-2-GuessTheFlag";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		814F98672D2DD41900CEBA38 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "07-NamesToFaces/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-7-NamesToFaces";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		814F98682D2DD41900CEBA38 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "07-NamesToFaces/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-7-NamesToFaces";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -943,6 +1064,15 @@
 			buildConfigurations = (
 				812F96DE2D10FC350057E0C0 /* Debug */,
 				812F96DF2D10FC350057E0C0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		814F986A2D2DD41900CEBA38 /* Build configuration list for PBXNativeTarget "07-NamesToFaces" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				814F98672D2DD41900CEBA38 /* Debug */,
+				814F98682D2DD41900CEBA38 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
