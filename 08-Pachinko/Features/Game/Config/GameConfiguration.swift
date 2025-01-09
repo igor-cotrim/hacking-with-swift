@@ -10,7 +10,9 @@ import Foundation
 enum GameConfiguration {
     static let backgroundPosition = CGPoint(x: 512, y: 384)
     static let scoreLabelPosition = CGPoint(x: 980, y: 700)
+    static let ballsLabelPosition = CGPoint(x: 980, y: 650)
     static let editLabelPosition = CGPoint(x: 80, y: 700)
+    static let resetLabelPosition = CGPoint(x: 200, y: 700)
     static let slotPositions = [
         CGPoint(x: 128, y: 32),
         CGPoint(x: 384, y: 32),

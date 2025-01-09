@@ -11,11 +11,14 @@ import SpriteKit
 class GameScene: SKScene, SKPhysicsContactDelegate {
     // MARK: - Properties
     private let scoreManager = ScoreManager()
+    private let ballsManager = BallsManager()
     private let physicsManager = PhysicsManager()
     private var state = GameState()
     
     private var scoreLabel: SKLabelNode!
+    private var ballsLabel: SKLabelNode!
     private var editLabel: SKLabelNode!
+    private var resetLabel: SKLabelNode!
     
     // MARK: - Scene Lifecycle
     override func didMove(to view: SKView) {
@@ -41,13 +44,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreLabel.position = GameConfiguration.scoreLabelPosition
         addChild(scoreLabel)
         
+        ballsLabel = SKLabelNode(fontNamed: "Chalkduster")
+        ballsLabel.text = "Balls: 5"
+        ballsLabel.horizontalAlignmentMode = .right
+        ballsLabel.position = GameConfiguration.ballsLabelPosition
+        addChild(ballsLabel)
+        
         editLabel = SKLabelNode(fontNamed: "Chalkduster")
         editLabel.text = "Edit"
         editLabel.position = GameConfiguration.editLabelPosition
         addChild(editLabel)
         
+        resetLabel = SKLabelNode(fontNamed: "Chalkduster")
+        resetLabel.text = "Reset"
+        resetLabel.position = GameConfiguration.resetLabelPosition
+        addChild(resetLabel)
+        
         scoreManager.onScoreChanged = { [weak self] score in
             self?.scoreLabel.text = "Score: \(score)"
+        }
+        ballsManager.onBallsChanged = { [weak self] ball in
+            self?.ballsLabel.text = "Balls: \(ball)"
         }
     }
     
@@ -98,12 +115,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let location = touch.location(in: self)
         let objects = nodes(at: location)
         
+        if objects.contains(resetLabel) {
+            scoreManager.reset()
+            ballsManager.reset()
+            resetGameElements()
+            return
+        }
+        
         if objects.contains(editLabel) {
             state.isEditingMode.toggle()
             editLabel.text = state.isEditingMode ? "Done" : "Edit"
         } else if state.isEditingMode {
             createObstacle(at: location)
         } else {
+            if location.y < frame.height / 2 || ballsManager.balls == 0 {
+                return
+            }
+            
             createBall(at: location)
         }
     }
@@ -120,12 +148,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let box = SKSpriteNode(color: color, size: size)
         box.zRotation = CGFloat.random(in: 0...3)
         box.position = position
+        box.name = GameItem.obstacle(size: size, color: color).name
         box.physicsBody = physicsManager.createPhysicsBody(for: .obstacle(size: size, color: color), size: size)
         addChild(box)
     }
     
     private func createBall(at position: CGPoint) {
-        let ball = SKSpriteNode(imageNamed: "ballRed")
+        ballsManager.decrement()
+        let colors = ["ballBlue", "ballCyan", "ballGreen", "ballGrey", "ballPurple", "ballRed", "ballYellow"]
+        let ball = SKSpriteNode(imageNamed: colors.randomElement() ?? "ballRed")
         ball.position = position
         ball.name = GameItem.ball.name
         ball.physicsBody = physicsManager.createPhysicsBody(for: .ball, size: ball.size)
@@ -147,6 +178,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if object.name == "good" {
             destroyBall(ball)
             scoreManager.increment()
+            ballsManager.increment()
         } else if object.name == "bad" {
             destroyBall(ball)
             scoreManager.decrement()
@@ -159,5 +191,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addChild(fireParticles)
         }
         ball.removeFromParent()
+    }
+    
+    // MARK: - Helper Functions
+    private func resetGameElements() {
+        enumerateChildNodes(withName: "//*") { node, _ in
+            if node.name == GameItem.ball.name || node.name == "obstacle" {
+                node.removeFromParent()
+            }
+        }
     }
 }
