@@ -9,16 +9,25 @@ import UIKit
 
 class NamesToFacesViewModel {
     // MARK: - Properties
-    private var people: [Person] = []
+    private var people: [Person] = [] {
+        didSet {
+            onPeopleUpdated?()
+        }
+    }
     private let imageService: ImageServiceProtocol
+    private let storageService: StorageServiceProtocol
     
     // MARK: - Callbacks
     var onPeopleUpdated: (() -> Void)?
     var onError: ((String) -> Void)?
     
     // MARK: - Initialization
-    init(imageService: ImageServiceProtocol = ImageService()) {
+    init(imageService: ImageServiceProtocol = ImageService(),
+         storageService: StorageServiceProtocol = StorageService()) {
         self.imageService = imageService
+        self.storageService = storageService
+        
+        loadPeople()
     }
     
     // MARK: - Public Methods
@@ -42,18 +51,32 @@ class NamesToFacesViewModel {
         
         let person = Person(name: "Unknown", image: imageName)
         people.append(person)
+        savePeople()
         onPeopleUpdated?()
     }
     
     func deletePerson(at index: Int) {
         guard index < people.count else { return }
         people.remove(at: index)
+        savePeople()
         onPeopleUpdated?()
     }
     
     func updatePersonName(at index: Int, with newName: String) {
         guard index < people.count else { return }
         people[index].name = newName
+        savePeople()
         onPeopleUpdated?()
+    }
+    
+    // MARK: - Private Methods
+    private func savePeople() {
+        guard let data = try? JSONEncoder().encode(people) else { return }
+        storageService.save(data, forKey: StorageService.Keys.people)
+    }
+    
+    private func loadPeople() {
+        guard let data = storageService.load(forKey: StorageService.Keys.people) else { return }
+        people = (try? JSONDecoder().decode([Person].self, from: data)) ?? []
     }
 }
