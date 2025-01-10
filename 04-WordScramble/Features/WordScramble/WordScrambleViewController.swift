@@ -69,7 +69,7 @@ final class WordScrambleViewController: UITableViewController {
     }
     
     @objc private func restartGame() {
-        viewModel.startGame()
+        viewModel.restartGame()
     }
 }
 

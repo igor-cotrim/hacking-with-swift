@@ -8,7 +8,9 @@
 import UIKit
 
 class StormViewViewController: UITableViewController {
-    var pictures = [String]()
+    private var pictures = [String]()
+    private let defaults = UserDefaults.standard
+    private let clickCountKey = "pictureClickCounts"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,17 @@ class StormViewViewController: UITableViewController {
         }
     }
     
+    private func getClickCount(for picture: String) -> Int {
+        let counts = defaults.dictionary(forKey: clickCountKey) as? [String: Int] ?? [:]
+        return counts[picture] ?? 0
+    }
+    
+    private func incrementClickCount(for picture: String) {
+        var counts = defaults.dictionary(forKey: clickCountKey) as? [String: Int] ?? [:]
+        counts[picture] = (counts[picture] ?? 0) + 1
+        defaults.set(counts, forKey: clickCountKey)
+    }
+    
     @objc private func shareTapped() {
         guard let appURL = URL(string: "https://stormviewer.app") else { return }
         let activityViewController = UIActivityViewController(activityItems: [appURL], applicationActivities: nil)
@@ -67,13 +80,19 @@ extension StormViewViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         let picture = pictures[indexPath.row]
+        let clickCount = getClickCount(for: picture)
         cell.textLabel?.text = picture
+        cell.detailTextLabel?.text = "Visualizado \(clickCount) vez\(clickCount == 1 ? "" : "es")"
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "Detail") as? StormViewDetailViewController {
+            let picture = pictures[indexPath.row]
+            incrementClickCount(for: picture)
+            tableView.reloadRows(at: [indexPath], with: .none)
+            
             viewController.selectedImage = pictures[indexPath.row]
             viewController.currentImageIndex = indexPath.row + 1
             viewController.totalOfImages = pictures.count
