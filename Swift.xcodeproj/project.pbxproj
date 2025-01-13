@@ -11,6 +11,7 @@
 		812F96CD2D10FC340057E0C0 /* 02-GuessTheFlag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "02-GuessTheFlag.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "07-NamesToFaces.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8164A03F2D2EEA9B00D68DF4 /* 08-Pachinko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "08-Pachinko.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "09-Instafilter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819005242D10EDF10071B0DB /* 01-StormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-StormView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E00E062D15E5600000410B /* 03-EasyBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-EasyBrowser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "05-WhitehousePetitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -38,6 +39,13 @@
 				Info.plist,
 			);
 			target = 814F98552D2DD41800CEBA38 /* 07-NamesToFaces */;
+		};
+		8182F43E2D3577F0000F1ADE /* Exceptions for "09-Instafilter" folder in "09-Instafilter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 8182F42A2D3577EF000F1ADE /* 09-Instafilter */;
 		};
 		819005362D10EDF20071B0DB /* Exceptions for "01-StormView" folder in "01-StormView" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
@@ -97,6 +105,14 @@
 		8164A0402D2EEA9B00D68DF4 /* 08-Pachinko */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "08-Pachinko";
+			sourceTree = "<group>";
+		};
+		8182F42C2D3577EF000F1ADE /* 09-Instafilter */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				8182F43E2D3577F0000F1ADE /* Exceptions for "09-Instafilter" folder in "09-Instafilter" target */,
+			);
+			path = "09-Instafilter";
 			sourceTree = "<group>";
 		};
 		819005262D10EDF10071B0DB /* 01-StormView */ = {
@@ -162,6 +178,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8182F4282D3577EF000F1ADE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		819005212D10EDF10071B0DB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,6 +227,7 @@
 				8123FDFC2D26F657009CE726 /* 06-7SwiftyWords */,
 				814F98572D2DD41800CEBA38 /* 07-NamesToFaces */,
 				8164A0402D2EEA9B00D68DF4 /* 08-Pachinko */,
+				8182F42C2D3577EF000F1ADE /* 09-Instafilter */,
 				819005252D10EDF10071B0DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -219,6 +243,7 @@
 				8123FDFB2D26F656009CE726 /* 06-7SwiftyWords.app */,
 				814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */,
 				8164A03F2D2EEA9B00D68DF4 /* 08-Pachinko.app */,
+				8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -312,6 +337,28 @@
 			);
 			productName = "08-Pachinko";
 			productReference = 8164A03F2D2EEA9B00D68DF4 /* 08-Pachinko.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8182F42A2D3577EF000F1ADE /* 09-Instafilter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8182F43F2D3577F0000F1ADE /* Build configuration list for PBXNativeTarget "09-Instafilter" */;
+			buildPhases = (
+				8182F4272D3577EF000F1ADE /* Sources */,
+				8182F4282D3577EF000F1ADE /* Frameworks */,
+				8182F4292D3577EF000F1ADE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				8182F42C2D3577EF000F1ADE /* 09-Instafilter */,
+			);
+			name = "09-Instafilter";
+			packageProductDependencies = (
+			);
+			productName = "09-Instafilter";
+			productReference = 8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */;
 			productType = "com.apple.product-type.application";
 		};
 		819005232D10EDF10071B0DB /* 01-StormView */ = {
@@ -424,6 +471,9 @@
 					8164A03E2D2EEA9B00D68DF4 = {
 						CreatedOnToolsVersion = 16.0;
 					};
+					8182F42A2D3577EF000F1ADE = {
+						CreatedOnToolsVersion = 16.0;
+					};
 					819005232D10EDF10071B0DB = {
 						CreatedOnToolsVersion = 16.0;
 					};
@@ -460,6 +510,7 @@
 				8123FDFA2D26F656009CE726 /* 06-7SwiftyWords */,
 				814F98552D2DD41800CEBA38 /* 07-NamesToFaces */,
 				8164A03E2D2EEA9B00D68DF4 /* 08-Pachinko */,
+				8182F42A2D3577EF000F1ADE /* 09-Instafilter */,
 			);
 		};
 /* End PBXProject section */
@@ -487,6 +538,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8164A03D2D2EEA9B00D68DF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8182F4292D3577EF000F1ADE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -546,6 +604,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8164A03B2D2EEA9B00D68DF4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8182F4272D3577EF000F1ADE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -814,6 +879,62 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
+		8182F43C2D3577F0000F1ADE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "09-Instafilter/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-9-Instafilter";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8182F43D2D3577F0000F1ADE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "09-Instafilter/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-9-Instafilter";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -1197,6 +1318,15 @@
 			buildConfigurations = (
 				8164A0532D2EEA9C00D68DF4 /* Debug */,
 				8164A0542D2EEA9C00D68DF4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8182F43F2D3577F0000F1ADE /* Build configuration list for PBXNativeTarget "09-Instafilter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8182F43C2D3577F0000F1ADE /* Debug */,
+				8182F43D2D3577F0000F1ADE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
