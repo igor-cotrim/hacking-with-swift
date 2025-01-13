@@ -11,14 +11,15 @@ import CoreImage
 class InstafilterViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var intensity: UISlider!
+    @IBOutlet weak var radius: UISlider!
     var currentImage: UIImage!
     var context: CIContext!
-    var currentFilter: CIFilter!
+    var currentFilter: CIFilter! = nil { didSet { title = currentFilter?.name } }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "YACIFP"
+        title = "Instafilter"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
@@ -26,7 +27,7 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
         )
         
         context = CIContext()
-        currentFilter = CIFilter(name: "CISepiaTone")
+//        currentFilter = CIFilter(name: "CISepiaTone")
     }
     
     @objc func importPicture() {
@@ -42,6 +43,7 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
     ) {
         guard let image = info[.editedImage] as? UIImage else { return }
         dismiss(animated: true)
+        currentFilter = CIFilter(name: "CISepiaTone")
         currentImage = image
         
         let beginImage = CIImage(image: currentImage)
@@ -85,7 +87,16 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func save(_ sender: UIButton) {
-        guard let image = imageView.image else { return }
+        guard let image = imageView.image else {
+            let alert = UIAlertController(
+                title: "Don't have an image",
+                message: "Please select one from your library first",
+                preferredStyle: .alert
+            )
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+            return
+        }
         UIImageWriteToSavedPhotosAlbum(
             image,
             self,
@@ -98,7 +109,12 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
         applyProcessing()
     }
     
+    @IBAction func radiusChanged(_ sender: UISlider) {
+        applyProcessing()
+    }
+    
     func applyProcessing() {
+        guard let currentFilter else { return }
         let inputKeys = currentFilter.inputKeys
         
         if inputKeys.contains(kCIInputIntensityKey) {
@@ -106,7 +122,7 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
         }
         
         if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(intensity.value * 200, forKey: kCIInputRadiusKey)
+            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
         }
         
         if inputKeys.contains(kCIInputScaleKey) {
