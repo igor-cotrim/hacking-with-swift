@@ -13,6 +13,7 @@
 		8164A03F2D2EEA9B00D68DF4 /* 08-Pachinko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "08-Pachinko.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "09-Instafilter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819005242D10EDF10071B0DB /* 01-StormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-StormView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81CA01A82D37171400589A69 /* 10-Whack-a-Penguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "10-Whack-a-Penguin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E00E062D15E5600000410B /* 03-EasyBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-EasyBrowser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "05-WhitehousePetitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F934812D1A04C700B33C41 /* 04-WordScramble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "04-WordScramble.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,6 +124,11 @@
 			path = "01-StormView";
 			sourceTree = "<group>";
 		};
+		81CA01A92D37171400589A69 /* 10-Whack-a-Penguin */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "10-Whack-a-Penguin";
+			sourceTree = "<group>";
+		};
 		81E00E072D15E5600000410B /* 03-EasyBrowser */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -192,6 +198,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81CA01A52D37171400589A69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81E00E032D15E5600000410B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -228,6 +241,7 @@
 				814F98572D2DD41800CEBA38 /* 07-NamesToFaces */,
 				8164A0402D2EEA9B00D68DF4 /* 08-Pachinko */,
 				8182F42C2D3577EF000F1ADE /* 09-Instafilter */,
+				81CA01A92D37171400589A69 /* 10-Whack-a-Penguin */,
 				819005252D10EDF10071B0DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -244,6 +258,7 @@
 				814F98562D2DD41800CEBA38 /* 07-NamesToFaces.app */,
 				8164A03F2D2EEA9B00D68DF4 /* 08-Pachinko.app */,
 				8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */,
+				81CA01A82D37171400589A69 /* 10-Whack-a-Penguin.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -383,6 +398,28 @@
 			productReference = 819005242D10EDF10071B0DB /* 01-StormView.app */;
 			productType = "com.apple.product-type.application";
 		};
+		81CA01A72D37171400589A69 /* 10-Whack-a-Penguin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81CA01BE2D37171500589A69 /* Build configuration list for PBXNativeTarget "10-Whack-a-Penguin" */;
+			buildPhases = (
+				81CA01A42D37171400589A69 /* Sources */,
+				81CA01A52D37171400589A69 /* Frameworks */,
+				81CA01A62D37171400589A69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81CA01A92D37171400589A69 /* 10-Whack-a-Penguin */,
+			);
+			name = "10-Whack-a-Penguin";
+			packageProductDependencies = (
+			);
+			productName = "10-Whack-a-Penguin";
+			productReference = 81CA01A82D37171400589A69 /* 10-Whack-a-Penguin.app */;
+			productType = "com.apple.product-type.application";
+		};
 		81E00E052D15E5600000410B /* 03-EasyBrowser */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81E00E182D15E5610000410B /* Build configuration list for PBXNativeTarget "03-EasyBrowser" */;
@@ -456,7 +493,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1600;
+				LastSwiftUpdateCheck = 1620;
 				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					8123FDFA2D26F656009CE726 = {
@@ -476,6 +513,9 @@
 					};
 					819005232D10EDF10071B0DB = {
 						CreatedOnToolsVersion = 16.0;
+					};
+					81CA01A72D37171400589A69 = {
+						CreatedOnToolsVersion = 16.2;
 					};
 					81E00E052D15E5600000410B = {
 						CreatedOnToolsVersion = 16.0;
@@ -511,6 +551,7 @@
 				814F98552D2DD41800CEBA38 /* 07-NamesToFaces */,
 				8164A03E2D2EEA9B00D68DF4 /* 08-Pachinko */,
 				8182F42A2D3577EF000F1ADE /* 09-Instafilter */,
+				81CA01A72D37171400589A69 /* 10-Whack-a-Penguin */,
 			);
 		};
 /* End PBXProject section */
@@ -552,6 +593,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		819005222D10EDF10071B0DB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81CA01A62D37171400589A69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -618,6 +666,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		819005202D10EDF10071B0DB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81CA01A42D37171400589A69 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1113,6 +1168,68 @@
 			};
 			name = Release;
 		};
+		81CA01BC2D37171500589A69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-0-Whack-a-Penguin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		81CA01BD2D37171500589A69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-0-Whack-a-Penguin";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Release;
+		};
 		81E00E192D15E5610000410B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1345,6 +1462,15 @@
 			buildConfigurations = (
 				819005382D10EDF20071B0DB /* Debug */,
 				819005392D10EDF20071B0DB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81CA01BE2D37171500589A69 /* Build configuration list for PBXNativeTarget "10-Whack-a-Penguin" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81CA01BC2D37171500589A69 /* Debug */,
+				81CA01BD2D37171500589A69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
