@@ -7,27 +7,82 @@
 
 import UIKit
 import CoreImage
+import Combine
 
-class InstafilterViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class InstafilterViewController: UIViewController {
+    // MARK: - UI Components
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var intensity: UISlider!
     @IBOutlet weak var radius: UISlider!
-    var currentImage: UIImage!
-    var context: CIContext!
-    var currentFilter: CIFilter! = nil { didSet { title = currentFilter?.name } }
     
+    // MARK: - Properties
+    private let viewModel = InstafilterViewModel()
+    private var cancellables = Set<AnyCancellable>()
+    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupUI()
+        setupBindings()
+    }
+    // MARK: - Private Methods
+    private func setupUI() {
         title = "Instafilter"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .add,
             target: self,
             action: #selector(importPicture)
         )
+    }
+    
+    private func setupBindings() {
+        viewModel.$intensityValue
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                self?.intensity.value = value
+            }
+            .store(in: &cancellables)
         
-        context = CIContext()
-//        currentFilter = CIFilter(name: "CISepiaTone")
+        viewModel.$radiusValue
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] value in
+                self?.radius.value = value
+            }
+            .store(in: &cancellables)
+        viewModel.$screenTitle
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] title in
+                self?.title = title
+            }
+            .store(in: &cancellables)
+        viewModel.$processedImage
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] image in
+                self?.imageView.image = image
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$errorMessage
+            .receive(on: DispatchQueue.main)
+            .compactMap { $0 }
+            .sink { [weak self] message in
+                self?.showAlert(title: "Error", message: message)
+            }
+            .store(in: &cancellables)
+        
+        viewModel.$successMessage
+            .receive(on: DispatchQueue.main)
+            .compactMap { $0 }
+            .sink { [weak self] message in
+                self?.showAlert(title: "Success", message: message)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
     
     @objc func importPicture() {
@@ -37,33 +92,15 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
         present(picker, animated: true)
     }
     
-    func imagePickerController(
-        _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
-    ) {
-        guard let image = info[.editedImage] as? UIImage else { return }
-        dismiss(animated: true)
-        currentFilter = CIFilter(name: "CISepiaTone")
-        currentImage = image
-        
-        let beginImage = CIImage(image: currentImage)
-        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
-        applyProcessing()
-    }
-    
     @IBAction func changeFilter(_ sender: UIButton) {
-        let alert = UIAlertController(
-            title: "Choose Filter",
-            message: nil,
-            preferredStyle: .actionSheet
-        )
-        alert.addAction(UIAlertAction(title: "CIBumpDistortion", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CIGaussianBlur", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CIPixellate", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CISepiaTone", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CITwirlDistortion", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CIUnsharpMask", style: .default, handler: setFilter))
-        alert.addAction(UIAlertAction(title: "CIVignette", style: .default, handler: setFilter))
+        let alert = UIAlertController(title: "Choose Filter", message: nil, preferredStyle: .actionSheet)
+        
+        viewModel.getAvailableFilters().forEach { filter in
+            alert.addAction(UIAlertAction(title: filter.name, style: .default) { [weak self] _ in
+                self?.viewModel.setFilter(filter.name)
+            })
+        }
+        
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
         if let popoverController = alert.popoverPresentationController {
@@ -74,94 +111,27 @@ class InstafilterViewController: UIViewController, UIImagePickerControllerDelega
         present(alert, animated: true)
     }
     
-    func setFilter(action: UIAlertAction) {
-        guard currentImage != nil, let actionTitle = action.title else {
-            return
-        }
-        
-        currentFilter = CIFilter(name: actionTitle)
-        
-        let beginImage = CIImage(image: currentImage)
-        currentFilter.setValue(beginImage, forKey: kCIInputImageKey)
-        applyProcessing()
-    }
-    
     @IBAction func save(_ sender: UIButton) {
-        guard let image = imageView.image else {
-            let alert = UIAlertController(
-                title: "Don't have an image",
-                message: "Please select one from your library first",
-                preferredStyle: .alert
-            )
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-            return
-        }
-        UIImageWriteToSavedPhotosAlbum(
-            image,
-            self,
-            #selector(image(_:didFinishSavingWithError:contextInfo:)),
-            nil
-        )
+        viewModel.saveImage()
     }
     
     @IBAction func intensityChanged(_ sender: UISlider) {
-        applyProcessing()
+        viewModel.updateIntensity(sender.value)
     }
     
     @IBAction func radiusChanged(_ sender: UISlider) {
-        applyProcessing()
-    }
-    
-    func applyProcessing() {
-        guard let currentFilter else { return }
-        let inputKeys = currentFilter.inputKeys
-        
-        if inputKeys.contains(kCIInputIntensityKey) {
-            currentFilter.setValue(intensity.value, forKey: kCIInputIntensityKey)
-        }
-        
-        if inputKeys.contains(kCIInputRadiusKey) {
-            currentFilter.setValue(radius.value * 200, forKey: kCIInputRadiusKey)
-        }
-        
-        if inputKeys.contains(kCIInputScaleKey) {
-            currentFilter.setValue(intensity.value * 10, forKey: kCIInputScaleKey)
-        }
-        
-        if inputKeys.contains(kCIInputCenterKey) {
-            currentFilter
-                .setValue(
-                    CIVector(x: currentImage.size.width / 2, y: currentImage.size.height / 2),
-                    forKey: kCIInputCenterKey
-                )
-        }
-        
-        guard let outputImage = currentFilter.outputImage else { return }
-        
-        if let cgImage = context.createCGImage(
-            outputImage,
-            from: outputImage.extent
-        ) {
-            let processedImage = UIImage(cgImage: cgImage)
-            imageView.image = processedImage
-        }
-    }
-    
-    @objc func image(
-        _ image: UIImage,
-        didFinishSavingWithError error: Error?,
-        contextInfo: UnsafeRawPointer
-    ) {
-        if let error = error {
-            let alert = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        } else {
-            let alert = UIAlertController(title: "Saved", message: "Your altered image has been saved", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default))
-            present(alert, animated: true)
-        }
+        viewModel.updateRadius(sender.value)
     }
 }
 
+// MARK: - UIImagePickerController Delegate
+extension InstafilterViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(
+        _ picker: UIImagePickerController,
+        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
+    ) {
+        guard let image = info[.editedImage] as? UIImage else { return }
+        dismiss(animated: true)
+        viewModel.setImage(image)
+    }
+}
