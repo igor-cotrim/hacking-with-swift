@@ -195,7 +195,8 @@ extension SevenSwiftyWordsView {
         currentButtons.removeAll()
         for (index, letter) in letters.enumerated() where index < letterButtons.count {
             letterButtons[index].setTitle(letter, for: .normal)
-            letterButtons[index].isHidden = false
+            letterButtons[index].alpha = 1
+            letterButtons[index].isUserInteractionEnabled = true
         }
     }
     
@@ -206,7 +207,10 @@ extension SevenSwiftyWordsView {
     func resetCurrentButtons() {
         for button in currentButtons {
             if !usedButtons.contains(button) {
-                button.isHidden = false
+                UIView.animate(withDuration: 0.3) {
+                    button.alpha = 1
+                    button.isUserInteractionEnabled = true
+                }
             }
         }
         currentButtons.removeAll()
@@ -226,7 +230,11 @@ extension SevenSwiftyWordsView {
         guard let buttonTitle = sender.titleLabel?.text else { return }
         onLetterTapped?(buttonTitle, sender)
         currentButtons.append(sender)
-        sender.isHidden = true
+        
+        UIView.animate(withDuration: 0.3) {
+            sender.alpha = 0
+            sender.isUserInteractionEnabled = false
+        }
     }
     
     private func submitTapped(_ sender: UIButton) {

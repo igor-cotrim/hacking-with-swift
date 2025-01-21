@@ -52,6 +52,26 @@ class GuessTheFlagViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func animate(_ button: UIButton) {
+        UIView.animate(withDuration: 0.2,
+                       delay: 0,
+                       usingSpringWithDamping: 0.5,
+                       initialSpringVelocity: 0.5,
+                       options: [],
+                       animations: {
+            button.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }) { _ in
+            UIView.animate(withDuration: 0.2,
+                           delay: 0,
+                           usingSpringWithDamping: 0.5,
+                           initialSpringVelocity: 0.5,
+                           options: [],
+                           animations: {
+                button.transform = CGAffineTransform.identity
+            })
+        }
+    }
+    
     @objc private func showCurrentScore() {
         let alert = UIAlertController(
             title: "YOUR CURRENT SCORE",
@@ -64,6 +84,8 @@ class GuessTheFlagViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         guard let index = [buttonOne, buttonTwo, buttonThree].firstIndex(of: sender) else { return }
+        
+        animate(sender)
         
         let isCorrect = quiz.checkAnswer(index: index)
         let message = isCorrect ? "Correct!" : "Wrong! That’s the flag of \(quiz.currentCountries[quiz.correctAnswerIndex])"

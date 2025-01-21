@@ -58,7 +58,11 @@ class InstafilterViewController: UIViewController {
         viewModel.$processedImage
             .receive(on: DispatchQueue.main)
             .sink { [weak self] image in
+                self?.imageView.alpha = 0
                 self?.imageView.image = image
+                UIView.animate(withDuration: 1) {
+                    self?.imageView.alpha = 1
+                }
             }
             .store(in: &cancellables)
         
