@@ -56,7 +56,7 @@
 		<key>09-Instafilter.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>10-Whack-a-Penguin.xcscheme_^#shared#^_</key>
 		<dict>
@@ -66,7 +66,7 @@
 		<key>11-Capital-Cities.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>9</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
