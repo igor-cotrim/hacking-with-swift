@@ -8,77 +8,77 @@
 import UIKit
 import MapKit
 
-class CapitalCitiesViewController: UIViewController, MKMapViewDelegate {
+class CapitalCitiesViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
+    
+    private let viewModel = CapitalCitiesViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let london = Capital(
-            title: "London",
-            coordinate: CLLocationCoordinate2DMake(51.507222, -0.1275),
-            info: "Home to the 2012 Summer Olympics"
-        )
-        let oslo = Capital(
-            title: "Oslo",
-            coordinate: CLLocationCoordinate2DMake(59.95, 10.75),
-            info: "Founded over a thousand years ago"
-        )
-        let paris = Capital(
-            title: "Paris",
-            coordinate: CLLocationCoordinate2DMake(48.8567, 2.3508),
-            info: "Oftn called the City of Love"
-        )
-        let rome = Capital(
-            title: "Rome",
-            coordinate: CLLocationCoordinate2DMake(41.9, 12.5),
-            info: "Has a whole country inside it"
-        )
-        let washingtionDc = Capital(
-            title: "Washington D.C",
-            coordinate: CLLocationCoordinate2DMake(38.895111, -77.036667),
-            info: "Named after George himself"
-        )
-
-        mapView.addAnnotations([london, oslo, paris, rome, washingtionDc])
+        setupMapView()
+        setupNavigationBar()
     }
     
-    func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
-        guard annotation is Capital else { return nil }
+    private func setupMapView() {
+        mapView.delegate = self
+        mapView.addAnnotations(viewModel.capitals)
+    }
+    
+    private func setupNavigationBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Edit Map Style",
+            style: .plain,
+            target: self,
+            action: #selector(chooseMapStyle)
+        )
+    }
+    
+    @objc private func chooseMapStyle() {
+        let alert = UIAlertController(
+            title: "Choose Map Style",
+            message: "Select a map display style",
+            preferredStyle: .actionSheet
+        )
+        
+        viewModel.getMapStyles().forEach { style in
+            alert.addAction(
+                UIAlertAction(title: style.title, style: .default) { [weak self] _ in
+                    self?.mapView.mapType = style.type
+                }
+            )
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
+        present(alert, animated: true)
+    }
+}
+
+// MARK: - MKMapViewDelegate
+extension CapitalCitiesViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let capital = annotation as? Capital else { return nil }
         
         let identifier = "CapitalAnnotation"
+        let annotationView = MKMarkerAnnotationView(annotation: capital, reuseIdentifier: identifier)
         
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        
-        if annotationView == nil {
-            annotationView = MKMarkerAnnotationView(
-                annotation: annotation,
-                reuseIdentifier: identifier
-            )
-            annotationView?.canShowCallout = true
-            
-            let btn = UIButton(type: .detailDisclosure)
-            annotationView?.rightCalloutAccessoryView = btn
-        } else {
-            annotationView?.annotation = annotation
-        }
+        annotationView.canShowCallout = true
+        annotationView.markerTintColor = .systemBlue
+        annotationView.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
         
         return annotationView
     }
     
-    func mapView(
-        _ mapView: MKMapView,
-        annotationView view: MKAnnotationView,
-        calloutAccessoryControlTapped control: UIControl
-    ) {
-        guard let capital = view.annotation as? Capital else { return }
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        guard let capital = view.annotation as? Capital,
+              let url = viewModel.getWikipediaURL(for: capital) else { return }
         
-        let alert = UIAlertController(
-            title: capital.title,
-            message: capital.info,
-            preferredStyle: .alert
-        )
+        let wikipediaVM = WikipediaViewModel(cityName: capital.title ?? "", url: url)
+        let wikipediaVC = WikipediaViewController(viewModel: wikipediaVM)
         
-        present(alert, animated: true)
+        let navController = UINavigationController(rootViewController: wikipediaVC)
+        navController.modalPresentationStyle = .fullScreen
+        
+        present(navController, animated: true)
     }
 }

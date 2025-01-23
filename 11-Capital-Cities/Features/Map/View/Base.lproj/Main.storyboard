@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPh-Nk-sDB">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <standardMapConfiguration key="preferredConfiguration"/>
                             </mapView>
                         </subviews>
@@ -27,7 +27,7 @@
                         <constraints>
                             <constraint firstItem="YPh-Nk-sDB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2Mg-eC-fJh"/>
                             <constraint firstItem="YPh-Nk-sDB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZEe-8Q-Im6"/>
-                            <constraint firstItem="YPh-Nk-sDB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Zlg-RI-yRC"/>
+                            <constraint firstItem="YPh-Nk-sDB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="51.5" id="Zlg-RI-yRC"/>
                             <constraint firstAttribute="bottomMargin" secondItem="YPh-Nk-sDB" secondAttribute="bottom" constant="-34" id="n3z-C4-Xmx"/>
                         </constraints>
                     </view>
