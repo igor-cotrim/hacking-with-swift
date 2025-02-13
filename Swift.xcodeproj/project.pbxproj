@@ -14,6 +14,7 @@
 		8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "09-Instafilter.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819005242D10EDF10071B0DB /* 01-StormView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "01-StormView.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		819784222D41B27800DD7707 /* 11-Capital-Cities.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "11-Capital-Cities.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		81A9C3A42D5E2B3C0069A938 /* 12-Fireworks-Night.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "12-Fireworks-Night.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81CA01A82D37171400589A69 /* 10-Whack-a-Penguin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "10-Whack-a-Penguin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E00E062D15E5600000410B /* 03-EasyBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "03-EasyBrowser.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81F1EE7F2D1F140D000607CA /* 05-WhitehousePetitions.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "05-WhitehousePetitions.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,6 +141,11 @@
 			path = "11-Capital-Cities";
 			sourceTree = "<group>";
 		};
+		81A9C3A52D5E2B3C0069A938 /* 12-Fireworks-Night */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "12-Fireworks-Night";
+			sourceTree = "<group>";
+		};
 		81CA01A92D37171400589A69 /* 10-Whack-a-Penguin */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = "10-Whack-a-Penguin";
@@ -221,6 +227,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		81A9C3A12D5E2B3C0069A938 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81CA01A52D37171400589A69 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -266,6 +279,7 @@
 				8182F42C2D3577EF000F1ADE /* 09-Instafilter */,
 				81CA01A92D37171400589A69 /* 10-Whack-a-Penguin */,
 				819784232D41B27800DD7707 /* 11-Capital-Cities */,
+				81A9C3A52D5E2B3C0069A938 /* 12-Fireworks-Night */,
 				819005252D10EDF10071B0DB /* Products */,
 			);
 			sourceTree = "<group>";
@@ -284,6 +298,7 @@
 				8182F42B2D3577EF000F1ADE /* 09-Instafilter.app */,
 				81CA01A82D37171400589A69 /* 10-Whack-a-Penguin.app */,
 				819784222D41B27800DD7707 /* 11-Capital-Cities.app */,
+				81A9C3A42D5E2B3C0069A938 /* 12-Fireworks-Night.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -445,6 +460,28 @@
 			productReference = 819784222D41B27800DD7707 /* 11-Capital-Cities.app */;
 			productType = "com.apple.product-type.application";
 		};
+		81A9C3A32D5E2B3C0069A938 /* 12-Fireworks-Night */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 81A9C3BA2D5E2B3D0069A938 /* Build configuration list for PBXNativeTarget "12-Fireworks-Night" */;
+			buildPhases = (
+				81A9C3A02D5E2B3C0069A938 /* Sources */,
+				81A9C3A12D5E2B3C0069A938 /* Frameworks */,
+				81A9C3A22D5E2B3C0069A938 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				81A9C3A52D5E2B3C0069A938 /* 12-Fireworks-Night */,
+			);
+			name = "12-Fireworks-Night";
+			packageProductDependencies = (
+			);
+			productName = "12-Fireworks-Night";
+			productReference = 81A9C3A42D5E2B3C0069A938 /* 12-Fireworks-Night.app */;
+			productType = "com.apple.product-type.application";
+		};
 		81CA01A72D37171400589A69 /* 10-Whack-a-Penguin */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81CA01BE2D37171500589A69 /* Build configuration list for PBXNativeTarget "10-Whack-a-Penguin" */;
@@ -564,6 +601,9 @@
 					819784212D41B27800DD7707 = {
 						CreatedOnToolsVersion = 16.2;
 					};
+					81A9C3A32D5E2B3C0069A938 = {
+						CreatedOnToolsVersion = 16.2;
+					};
 					81CA01A72D37171400589A69 = {
 						CreatedOnToolsVersion = 16.2;
 					};
@@ -603,6 +643,7 @@
 				8182F42A2D3577EF000F1ADE /* 09-Instafilter */,
 				81CA01A72D37171400589A69 /* 10-Whack-a-Penguin */,
 				819784212D41B27800DD7707 /* 11-Capital-Cities */,
+				81A9C3A32D5E2B3C0069A938 /* 12-Fireworks-Night */,
 			);
 		};
 /* End PBXProject section */
@@ -651,6 +692,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		819784202D41B27800DD7707 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81A9C3A22D5E2B3C0069A938 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -731,6 +779,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8197841E2D41B27800DD7707 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		81A9C3A02D5E2B3C0069A938 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1291,6 +1346,62 @@
 			};
 			name = Release;
 		};
+		81A9C3B82D5E2B3D0069A938 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-2-Fireworks-Night";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		81A9C3B92D5E2B3D0069A938 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = FBC3L63M29;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.igorcotrim.-2-Fireworks-Night";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		81CA01BC2D37171500589A69 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1594,6 +1705,15 @@
 			buildConfigurations = (
 				819784332D41B27900DD7707 /* Debug */,
 				819784342D41B27900DD7707 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		81A9C3BA2D5E2B3D0069A938 /* Build configuration list for PBXNativeTarget "12-Fireworks-Night" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				81A9C3B82D5E2B3D0069A938 /* Debug */,
+				81A9C3B92D5E2B3D0069A938 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
